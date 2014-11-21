@@ -11,16 +11,25 @@ import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-public class MainActivity extends Activity implements OnClickListener {	
+public class MainActivity extends Activity implements OnClickListener {
 	final Activity activity = this;
 	boolean btBackState = false; // 뒤로가기 버튼의 상태값을 갖는 변수
 	Timer timer = new Timer(); // 타이머 변수
 	private Toast toast;
+	private ImageButton estimate = null;
+	private ImageButton graph = null;
+	private ImageButton upup = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		estimate = (ImageButton) this.findViewById(R.id.estimate1);
+		graph = (ImageButton) this.findViewById(R.id.graph2);
+		upup = (ImageButton) this.findViewById(R.id.upup3);
+		estimate.setOnClickListener(this);
+		graph.setOnClickListener(this);
+		upup.setOnClickListener(this);
 	}
 
 	@Override
@@ -28,6 +37,12 @@ public class MainActivity extends Activity implements OnClickListener {
 
 		int sel = v.getId();
 		switch (sel) {
+		case R.id.estimate1:
+			Intent l = new Intent(MainActivity.this, BluetoothChat.class);
+			startActivity(l);
+			overridePendingTransition(android.R.anim.fade_in,
+					android.R.anim.fade_out);
+			break;
 		}
 	}
 
