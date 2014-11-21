@@ -324,14 +324,6 @@ public class BluetoothChat extends Activity {
 		}
 	};
 
-	public void sendMessage() {
-		SmsManager smsManager = SmsManager.getDefault();
-		smsManager.sendTextMessage("01077259070", null, "안녕하이 헬로 방가 ", null,
-				null);
-		Toast.makeText(getApplicationContext(), "현재위치가 등록된 번호로 전송되었습니다.",
-				Toast.LENGTH_LONG).show();
-	}
-
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (D)
 			Log.d(TAG, "onActivityResult " + resultCode);
