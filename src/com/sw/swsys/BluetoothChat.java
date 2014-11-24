@@ -75,11 +75,7 @@ public class BluetoothChat extends Activity {
 
 	// 변수선언
 	private ArrayList<Integer> outputValue = new ArrayList();
-	private int idx = 0;
-	private int sumValue = 0;
-	private int flag = 1;
-	private int inputKey = 0;
-	private long compare = 0;
+
 	// final MediaPlayer player = MediaPlayer.create(BluetoothChat.this,
 	// R.raw.kalimba);
 
