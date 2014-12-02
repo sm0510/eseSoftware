@@ -75,7 +75,11 @@ public class BluetoothChat extends Activity {
 
 	// 변수선언
 	private ArrayList<Integer> outputValue = new ArrayList();
-
+	private int idx = 0;
+	private int sumValue = 0;
+	private int flag = 1;
+	private int inputKey = 0;
+	private long compare = 0;
 	// final MediaPlayer player = MediaPlayer.create(BluetoothChat.this,
 	// R.raw.kalimba);
 
@@ -97,6 +101,7 @@ public class BluetoothChat extends Activity {
 			Log.e(TAG, "+++ ON CREATE +++");
 
 		// Set up the window layout
+		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.activity_start);
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,
 				R.layout.custom_title);
@@ -298,6 +303,51 @@ public class BluetoothChat extends Activity {
 					for (int i = 0; i < msg.arg1; i++) {
 						if (readMessage.charAt(i) >= 48
 								&& readMessage.charAt(i) <= 57) {
+							// int transInt = Integer.valueOf(readMessage);
+							// int transInt = Integer.parseInt(readMessage);
+							number = number.append(readMessage.charAt(i));
+							change_number = number.toString();
+						
+							//System.out.println("스트링 : "+change_number+"길이 : "+change_number.length());
+							compare = Integer.parseInt(change_number);
+							if(compare >= 1000)
+							{
+							
+							System.out.println("바뀐거"+compare);
+							}
+							if (Integer.parseInt(change_number) > 99
+									&& Integer.parseInt(change_number) <= 250) {
+								if (idx != 10) {
+									outputValue.add(Integer
+											.parseInt(change_number));
+									idx++;
+								} else {
+									Collections.sort(outputValue);
+									for (int j = 4; j < 7; j++) {
+										sumValue = sumValue
+												+ outputValue.get(j);
+									}
+									sumValue = (int) (sumValue / 3);
+									System.out.println("현재 수위는" + sumValue);
+									mConversationArrayAdapter.add("현재 수위는 "
+											+ String.valueOf(sumValue) + "cm");
+									if (mOutEditText.getText().toString()
+											.length() != 0) {
+										String saveKey = mOutEditText.getText()
+												.toString();
+										inputKey = Integer.parseInt(saveKey);
+									}
+/*									System.out.println("측정값 " + sumValue
+											+ " /// 입력값 " + inputKey);
+*/				
+
+									sumValue = 0;
+									outputValue.clear();
+									idx = 0;
+								}
+								// System.out.println("test one : "+change_number.charAt(0));
+							}
+							// number= number.delete(0, number.length());
 
 						}
 					}
@@ -319,6 +369,14 @@ public class BluetoothChat extends Activity {
 			}
 		}
 	};
+
+	public void sendMessage() {
+		SmsManager smsManager = SmsManager.getDefault();
+		smsManager.sendTextMessage("01077259070", null, "안녕하이 헬로 방가 ", null,
+				null);
+		Toast.makeText(getApplicationContext(), "현재위치가 등록된 번호로 전송되었습니다.",
+				Toast.LENGTH_LONG).show();
+	}
 
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (D)
