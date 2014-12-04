@@ -11,6 +11,8 @@ import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.sw.swsys.graph.LineGraphActivity;
+
 public class MainActivity extends Activity implements OnClickListener {
 	final Activity activity = this;
 	boolean btBackState = false; // 뒤로가기 버튼의 상태값을 갖는 변수
@@ -43,13 +45,19 @@ public class MainActivity extends Activity implements OnClickListener {
 			overridePendingTransition(android.R.anim.fade_in,
 					android.R.anim.fade_out);
 			break;
-		case R.id.upup3 :
+		case R.id.upup3:
 			Intent k = new Intent(MainActivity.this, DatabaseActivity.class);
 			startActivity(k);
 			overridePendingTransition(android.R.anim.fade_in,
 					android.R.anim.fade_out);
 			break;
-		
+		case R.id.graph2:
+			Intent j = new Intent(MainActivity.this, LineGraphActivity.class);
+			startActivity(j);
+			overridePendingTransition(android.R.anim.fade_in,
+					android.R.anim.fade_out);
+			break;
+
 		}
 	}
 

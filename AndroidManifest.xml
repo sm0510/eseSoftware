@@ -32,6 +32,7 @@
         <activity android:name="com.sw.swsys.DeviceListActivity" android:theme="@android:style/Theme.NoTitleBar"></activity>
         <activity android:name="com.sw.swsys.DatabaseActivity" android:theme="@android:style/Theme.NoTitleBar"></activity>
         <activity android:name="com.sw.swsys.ListViewActivity" android:theme="@android:style/Theme.NoTitleBar"></activity>
+        <activity android:name="com.sw.swsys.graph.LineGraphActivity" android:theme="@android:style/Theme.NoTitleBar"></activity>
     </application>
 
 </manifest>
