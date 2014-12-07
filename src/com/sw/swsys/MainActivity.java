@@ -45,13 +45,13 @@ public class MainActivity extends Activity implements OnClickListener {
 			overridePendingTransition(android.R.anim.fade_in,
 					android.R.anim.fade_out);
 			break;
-		case R.id.upup3:
+		case R.id.graph2:
 			Intent k = new Intent(MainActivity.this, DatabaseActivity.class);
 			startActivity(k);
 			overridePendingTransition(android.R.anim.fade_in,
 					android.R.anim.fade_out);
 			break;
-		case R.id.graph2:
+		case R.id.upup3:
 			Intent j = new Intent(MainActivity.this, LineGraphActivity.class);
 			startActivity(j);
 			overridePendingTransition(android.R.anim.fade_in,

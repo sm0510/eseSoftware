@@ -27,7 +27,7 @@ public class IntroActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_intro);
 		handler = new Handler();
-		handler.postDelayed(irun, 2000);
+		handler.postDelayed(irun, 3000);
 
 	}
 
