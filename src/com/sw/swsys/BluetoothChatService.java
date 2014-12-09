@@ -214,7 +214,7 @@ public class BluetoothChatService {
         // Send a failure message back to the Activity
         Message msg = mHandler.obtainMessage(BluetoothChat.MESSAGE_TOAST);
         Bundle bundle = new Bundle();
-        bundle.putString(BluetoothChat.TOAST, "수심측정을 그만합니다.");
+        bundle.putString(BluetoothChat.TOAST, "측정을 그만합니다.");
         msg.setData(bundle);
         mHandler.sendMessage(msg);
     }

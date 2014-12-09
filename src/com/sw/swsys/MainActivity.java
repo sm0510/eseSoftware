@@ -47,6 +47,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			break;
 		case R.id.graph2:
 			Intent k = new Intent(MainActivity.this, DatabaseActivity.class);
+			k.putExtra("height", "main");
 			startActivity(k);
 			overridePendingTransition(android.R.anim.fade_in,
 					android.R.anim.fade_out);

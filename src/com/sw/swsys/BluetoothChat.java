@@ -23,15 +23,11 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Vibrator;
-import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -77,7 +73,7 @@ public class BluetoothChat extends Activity {
 	private ArrayList<Integer> outputValue = new ArrayList();
 	private int idx = 0;
 	private int sumValue = 0;
-
+	private String height = null;
 	// final MediaPlayer player = MediaPlayer.create(BluetoothChat.this,
 	// R.raw.kalimba);
 
@@ -289,7 +285,6 @@ public class BluetoothChat extends Activity {
 				String readMessage = new String(readBuf, 0, msg.arg1);
 				StringBuffer number = new StringBuffer("");
 				String change_number = new String("");
-
 				if (msg.arg1 >= 4 && msg.arg1 <= 8) {
 
 					for (int i = 0; i < msg.arg1; i++) {
@@ -310,19 +305,46 @@ public class BluetoothChat extends Activity {
 										sumValue = sumValue
 												+ outputValue.get(j);
 									}
-									sumValue = (int) (sumValue / 3);
-									System.out.println("현재 수위는" + sumValue);
-									mConversationArrayAdapter.add("현재 수위는 "
+									sumValue = (int) (sumValue / 3) + 9;
+									System.out.println("측정 키값은?" + sumValue);
+									mConversationArrayAdapter.add("측정된 키값은? "
 											+ String.valueOf(sumValue) + "cm");
+									
+									height = String.valueOf(sumValue);
+									AlertDialog.Builder builder = new AlertDialog.Builder(BluetoothChat.this);     // 여기서 this는 Activity의 this
+									mChatService.stop();
+									// 여기서 부터는 알림창의 속성 설정
+									builder.setTitle("측정값 전송")        // 제목 설정
+									.setMessage("측정값이 '"+sumValue+"cm' 로 측정되었습니다. 저장하시겠습니까?")        // 메세지 설정
+									.setCancelable(false)        // 뒤로 버튼 클릭시 취소 가능 설정
+									.setPositiveButton("전송", new DialogInterface.OnClickListener(){       
+									 // 확인 버튼 클릭시 설정
+										
+									public void onClick(DialogInterface dialog, int whichButton){
+										Intent k = new Intent(BluetoothChat.this, DatabaseActivity.class);
+										System.out.println(height);
+										k.putExtra("height", height);
+										startActivity(k);
+									}
+									})
+									.setNegativeButton("취소", new DialogInterface.OnClickListener(){      
+									     // 취소 버튼 클릭시 설정
+									public void onClick(DialogInterface dialog, int whichButton){
+									dialog.cancel();
+									}
+									});
 
-									Intent k = new Intent(BluetoothChat.this, DatabaseActivity.class);
-									k.putExtra("height", sumValue);
-									startActivity(k);
+									AlertDialog dialog = builder.create();    // 알림창 객체 생성
+									dialog.show();    // 알림창 띄우기
+
+
 
 									sumValue = 0;
 									outputValue.clear();
 									idx = 0;
+
 								}
+
 							}
 
 						}
@@ -378,6 +400,7 @@ public class BluetoothChat extends Activity {
 		}
 	}
 
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
